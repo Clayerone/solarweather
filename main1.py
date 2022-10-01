@@ -46,11 +46,11 @@ lam = [:]
 
 #%%
 """
-Import data
+Import data  ?
 """
 #
 from spacepy import pycdf
-cdf = pycdf.CDF('MyCDF.cdf')
+cdf = pycdf.CDF('April 29th ISOIS.cdf')
 print(cdf)
 Epoch: CDF_TIME_TT2000 [60]
 data: CDF_FLOAT [60]
