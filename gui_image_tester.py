@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Oct  1 17:11:03 2022
+
+@author: claye
+"""
+
+
+# Import required libraries
+from tkinter import *
+from PIL import ImageTk, Image
+
+# Create an instance of tkinter window
+win = Tk()
+
+# Define the geometry of the window
+win.geometry("700x500")
+
+frame = Frame(win, width=400, height=400)
+frame.pack()
+frame.place(anchor='center', relx=0.5, rely=0.5)
+
+# Create an object of tkinter ImageTk
+img = ImageTk.PhotoImage(Image.open("C:/Users/claye/Documents/GitHub/solarweather/solarsystem1.png"))
+
+# Create a Label Widget to display the text or Image
+label = Label(frame, image = img)
+label.pack()
+
+win.mainloop()
+
