@@ -19,42 +19,33 @@ import matplotlib as plt
 # GUI
 import PySimpleGUI as sg
 
-
-#%%
-"""
-Variables
-"""
-#############
-# Constants #
-#############
-#
-# Speed of light
-c_ls = 299792458     # In (m/s) 
-#
-# Planck's Constant
-h_plank = 6.63*10**-34   # In (J*s)
-
-
- 
-
-
-
-
-
-
 #%%
 """
 Import data 
 """
 
+# Data From parker probe as it passed the Sun 
+f_S_18   = 'Sun 2018.txt'
+data_S_18 = np.loadtxt(f_S_18, skiprows=2, delimiter='\t')
+f_S_19   = 'Sun 2019.txt'
+data_S_19 = np.loadtxt(f_S_19, skiprows=2, delimiter='\t')
 
-fname = 'UTC_2018_10_06T18_08_26.txt'
+# Data From parker probe as it passed Venus
+f_V_18 = 'Venus 2018.txt'
+data_S_18 = np.loadtxt(f_V_18, skiprows=2, delimiter='\t')
+f_V_19 = 'Venus 2019.txt'
+data_S_18 = np.loadtxt(f_V_19, skiprows=2, delimiter='\t')
 
-data = np.loadtxt(fname, skiprows=2, delimiter='\t')
-[len_data, wid_data] = np.shape(data)
-t = data[:,0]
+# Data From parker probe as it passed near Mercury
+f_M_19 = 'Mercury 2019.txt'
+data_M_19 = np.loadtxt(f_M_19, skiprows=2, delimiter='\t')
+f_M_21 = 'Mercury 2021.txt'
+data_M_21 = np.loadtxt(f_M_21, skiprows=2, delimiter='\t')
 
-F_Hz = data[:,1]
+# Data From parker probe as it passed near Earth
+f_E_20 = 'Earth 2020.txt'
+data_E_20 = np.loadtxt(f_E_20, skiprows=2, delimiter='\t')
+
 
 #%%
 """
@@ -62,9 +53,6 @@ Main
 """
 
 
-# Frequency to wave length
-E_p = h_plank*F_Hz
-lam = (h_plank*c_ls)/E_p
 
 
 '''
@@ -84,6 +72,4 @@ while True:
         break
 
 window.close()
-
-
 
