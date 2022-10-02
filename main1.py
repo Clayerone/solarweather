@@ -62,12 +62,28 @@ Main
 """
 
 
+# Frequency to wave length
+E_p = h_plank*F_Hz
+lam = (h_plank*c_ls)/E_p
 
-E_phot = h_plank*f
 
-E_phot = (h_plank*c_ls)/lam
+'''
+GUI
+'''
+layout = [[sg.Text("Hear what Solar Weather sounds like!")], [sg.Button("Exit")]]
 
+# Create the window
+window = sg.Window("Solar Weather from Parker Solar Probe", layout)
 
+# Create an event loop
+while True:
+    event, values = window.read()
+    # End program if user closes window or
+    # presses the OK button
+    if event == "Exit" or event == sg.WIN_CLOSED:
+        break
+
+window.close()
 
 
 
