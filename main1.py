@@ -1,6 +1,6 @@
 
 print("hello butt munch")
-print("Why, Hello there")
+print("Why, Hello there, General Kenobi!")
            
 #%%
 """
@@ -19,50 +19,32 @@ import matplotlib as plt
 # GUI
 import PySimpleGUI as sg
 
-
 #%%
 """
-Variables
+Import data 
 """
-#############
-# Constants #
-#############
-#
-# Speed of light
-c_ls = 299792458     # In (m/s) 
-#
-# Planck's Constant
-h_plank = 6.63*10**-34   # In (J*s)
-#
-# Mass of Photon
- 
 
+# Data From parker probe as it passed the Sun 
+f_S_18   = 'Sun 2018.txt'
+data_S_18 = np.loadtxt(f_S_18, skiprows=2, delimiter='\t')
+f_S_19   = 'Sun 2019.txt'
+data_S_19 = np.loadtxt(f_S_19, skiprows=2, delimiter='\t')
 
+# Data From parker probe as it passed Venus
+f_V_18 = 'Venus 2018.txt'
+data_S_18 = np.loadtxt(f_V_18, skiprows=2, delimiter='\t')
+f_V_19 = 'Venus 2019.txt'
+data_S_18 = np.loadtxt(f_V_19, skiprows=2, delimiter='\t')
 
-f =[:]
-lam = [:]
+# Data From parker probe as it passed near Mercury
+f_M_19 = 'Mercury 2019.txt'
+data_M_19 = np.loadtxt(f_M_19, skiprows=2, delimiter='\t')
+f_M_21 = 'Mercury 2021.txt'
+data_M_21 = np.loadtxt(f_M_21, skiprows=2, delimiter='\t')
 
-
-
-#%%
-"""
-Import data  ?
-"""
-#
-from spacepy import pycdf
-cdf = pycdf.CDF('April 29th ISOIS.cdf')
-print(cdf)
-Epoch: CDF_TIME_TT2000 [60]
-data: CDF_FLOAT [60]
-cdf['data'][4] 
-0.8609974384307861
-data = cdf['data'][...] # don't forget the [...]
-cdf_dat = cdf.copy()
-cdf_dat.keys()
-['Epoch', 'data']
-cdf.close()
-
-
+# Data From parker probe as it passed near Earth
+f_E_20 = 'Earth 2020.txt'
+data_E_20 = np.loadtxt(f_E_20, skiprows=2, delimiter='\t')
 
 
 #%%
@@ -72,50 +54,22 @@ Main
 
 
 
-E_photf = h_plank*f
-
-E_phot = (h_plank*c_ls)/lam
-
-
 
 '''
-Audio ?
+GUI
 '''
+layout = [[sg.Text("Hear what Solar Weather sounds like!")], [sg.Button("Exit")]]
 
+# Create the window
+window = sg.Window("Solar Weather from Parker Solar Probe", layout)
 
-import math        #import needed modules
-import pyaudio     #sudo apt-get install python-pyaudio
+# Create an event loop
+while True:
+    event, values = window.read()
+    # End program if user closes window or
+    # presses the OK button
+    if event == "Exit" or event == sg.WIN_CLOSED:
+        break
 
-PyAudio = pyaudio.PyAudio     #initialize pyaudio
-
-#See https://en.wikipedia.org/wiki/Bit_rate#Audio
-BITRATE = 16000     #number of frames per second/frameset.      
-
-FREQUENCY = 500     #Hz, waves per second, 261.63=C4-note.
-LENGTH = 1     #seconds to play sound
-
-BITRATE = max(BITRATE, FREQUENCY+100)
-
-NUMBEROFFRAMES = int(BITRATE * LENGTH)
-RESTFRAMES = NUMBEROFFRAMES % BITRATE
-WAVEDATA = ''    
-
-#generating wawes
-for x in xrange(NUMBEROFFRAMES):
- WAVEDATA = WAVEDATA+chr(int(math.sin(x/((BITRATE/FREQUENCY)/math.pi))*127+128))    
-
-for x in xrange(RESTFRAMES): 
- WAVEDATA = WAVEDATA+chr(128)
-
-p = PyAudio()
-stream = p.open(format = p.get_format_from_width(1), 
-                channels = 1, 
-                rate = BITRATE, 
-                output = True)
-
-stream.write(WAVEDATA)
-stream.stop_stream()
-stream.close()
-p.terminate()
-
+window.close()
 
