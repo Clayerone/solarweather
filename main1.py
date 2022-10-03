@@ -1,7 +1,3 @@
-
-print("hello butt munch")
-print("Why, Hello there, General Kenobi!")
-           
 #%%
 """
 Packages
